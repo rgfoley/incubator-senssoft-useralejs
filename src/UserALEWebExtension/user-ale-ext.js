@@ -15,14 +15,19 @@ if (chrome) {
 // the value specified is the default value if one doesn't exist in the storage
 let store = browser.storage.local.get({
     userAleHost: userAleHost,
-    userAleScript: userAleScript
+    userAleScript: userAleScript,
+    toolUser: toolUser,
+    toolName: toolName,
+    toolVersion: toolVersion,
 }, storeCallback);
         
 function storeCallback(item) {
     console.log(item);
     userAleHost = item.userAleHost;
     userAleScript = item.userAleScript;
-    
+    toolUser = item.toolUser;
+    toolName = item.toolName;
+    toolVersion = item.toolVersion;
     injectScript();
 }
         
@@ -36,12 +41,15 @@ function injectScript() {
     userAleTag.setAttribute("id", "userale-plugin");
     userAleTag.setAttribute("data-url", userAleHost);
     userAleTag.setAttribute("data-autostart", true);
+    userAleTag.setAttribute("data-user", toolUser);
+    userAleTag.setAttribute("data-tool", toolName);
+    userAleTag.setAttribute("data-version", toolVersion);
     userAleTag.src = browser.extension.getURL(userAleScript);
     
     console.log("Injecting UserALE script into current page! " + userAleHost + " " + userAleScript);
     
     document.head.appendChild(userAleTag);
-    document.body.innerHTML += "<br/><br/>SUCCESS! UserALE has been injected onto the page!";
+    // document.body.innerHTML += "<br/><br/>SUCCESS! UserALE has been injected onto the page!";
 }
 
 
