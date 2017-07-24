@@ -49,7 +49,7 @@ gulp.task('rollup', function() {
   })
   .then(function(bundle) {
     return bundle.write({
-      format : 'umd',
+      format : 'iife',
       moduleName : 'userale',
       dest : 'build/' + userale + '.js'
     });
@@ -94,7 +94,7 @@ gulp.task('build', ['rollup', 'build-web-ext'], function() {
     .on('error', gutil.log)
     .pipe(rename({ suffix : '.min' }))
     .pipe(gulp.dest('build'))
-    .pipe(rename('userale-test.min.js')) // fordar: what is this for?
+    .pipe(rename(userale + '.min.js'))
     .pipe(gulp.dest('build'));
 });
 
