@@ -12,6 +12,7 @@ Additional documentation can be found at http://senssoft.incubator.apache.org/us
 To build UserALE.js:
 
 ```
+npm install
 npm run build
 ```
 
